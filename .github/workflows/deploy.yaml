@@ -1,0 +1,29 @@
+name: "CI/CD"
+on:
+  push:
+    branches: [master]
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v1
+    - name: Deploy to server
+      run: |
+        echo $HOSTNAME
+        hostname -I
+        source $HOME/postamat-api-venv/bin/activate
+        cd $HOME/postamat-api-venv/
+        git pull
+    - name: Install requirements
+      run: |
+        echo $HOSTNAME
+        hostname -I
+        source $HOME/postamat-api-venv/bin/activate
+        cd $HOME/postamat-api-venv/
+        pip install -q -r requirements.txt
+    - name: Restart service
+      run: |
+        echo $HOSTNAME
+        hostname -I
+        systemctl restart postamat-api.service
+        systemctl status postamat-api.service

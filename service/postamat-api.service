@@ -1,0 +1,9 @@
+[Unit]
+Description=Postamat API Service
+
+[Service]
+Type=simple
+ExecStart= /root/postamat-api/run.sh
+
+[Install]
+WantedBy=multi-user.target
